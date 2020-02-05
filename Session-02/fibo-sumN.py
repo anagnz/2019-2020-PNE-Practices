@@ -1,14 +1,11 @@
 def fibosum(n):
     index1 = 0
     index2 = 1
-    count = 0
     sumn = 0
     for number in range(0, n+1):
         if number == 0:
-            count = 0
             sumn = 0
         elif number == 1:
-            count = 1
             sumn = 1
         else:
             count = index1 + index2
