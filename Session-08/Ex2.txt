@@ -1,0 +1,9 @@
+Destination IP                  Name (if known)	            Time
+192.168.124.179	                Self	                    0.040 ms, 0.051 ms...
+212.128.255.129	                f-l3208-pc01                Not connected
+8.8.8.8	                        Google                      3.69 ms, 4.03 ms
+10.1.128.39	                    Mobile                      334 ms, 326 ms
+                                www.urjc.es                 2.27 ms, 2.51 ms
+                                github.com                  36.2 ms, 36.3 ms
+                                wikipedia.org               136 ms, 133 ms
+                                newdomain.com.au            303 ms, 302 ms
