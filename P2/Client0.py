@@ -1,4 +1,5 @@
 import socket
+import termcolor
 
 
 class Client:
@@ -31,3 +32,9 @@ class Client:
 
         # Return the response
         return response
+
+    def debug_talk(self, msg):
+        print(f"To server: ", end="")
+        termcolor.cprint(msg, "blue")
+        print(f"From server: ")
+        termcolor.cprint(self.talk(msg), "green")

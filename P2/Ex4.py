@@ -1,7 +1,7 @@
 from Client0 import Client
 
 PRACTICE = 2
-EXERCISE = 2
+EXERCISE = 4
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
@@ -12,6 +12,6 @@ PORT = 8081
 # -- Create a client object
 c = Client(IP, PORT)
 
-#Print the IP and PORTs
-print(c)
-
+print(f"Connection to SERVER at {c.ip}, PORT: {c.port}")
+c.debug_talk("Message 1---")
+c.debug_talk("Message 2: Testing !!!")
