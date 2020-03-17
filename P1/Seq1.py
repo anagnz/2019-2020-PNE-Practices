@@ -37,7 +37,7 @@ class Seq:
             for element in self.strbases:
                 if element == base:
                     counter = counter + 1
-            return counter
+            return counter, round((counter/ self.len()) *100, 1)
 
     def count(self):
         if self.strbases == self.NULL:
