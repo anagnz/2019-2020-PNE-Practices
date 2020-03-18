@@ -8,6 +8,7 @@ EXERCISE = 7
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
 sequence_list = ["AGTG\n", "CATG\n", "TATGG\n", "GAATG\n", "ACTG\n"]
+sequence0 = "AGTG"
 
 # -- Parameters of the server to talk to
 IP = "127.0.0.1"
@@ -20,19 +21,20 @@ print(f"* Testing PING...")
 print(c.talk("PING"))
 
 print(f"* Testing GET...")
+print("GET 0: ", c.talk("GET 0"))
 print("GET 1: ", c.talk("GET 1"))
 print("GET 2: ", c.talk("GET 2"))
 print("GET 3: ", c.talk("GET 3"))
 print("GET 4: ", c.talk("GET 4"))
 
 print(f"* Testing INFO...")
-print(c.talk("INFO AGAGAGATTTCC"))
+print(c.talk(f"INFO {sequence0}"))
 
 print(f"* Testing COMP...")
-print("COMP", c.talk("COMP AGATCCAT"))
+print("COMP", c.talk(f"COMP {sequence0}"))
 
 print(f"* Testing REV...")
-print("REV", c.talk("REV AGATCCAT"))
+print("REV", c.talk(f"REV {sequence0}"))
 
 print(f"* Testing GENE...")
 print("GENE U5", c.talk("GENE U5"))
