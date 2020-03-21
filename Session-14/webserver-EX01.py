@@ -22,7 +22,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         req_line = self.requestline.split()
 
-        if req_line == "/":
+        if req_line[1] == "/":
 
             # IN this simple server version:
             # We are NOT processing the client's request
