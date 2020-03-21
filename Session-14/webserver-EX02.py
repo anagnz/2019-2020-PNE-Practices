@@ -26,23 +26,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         FOLDER1 = "../P4/"
         FOLDER2 = "../Session-14/"
 
-        req_line = self.requestline.split()[1]
+        req_line = self.requestline.split()
 
-        if req_line == "/" or req_line == "/index.html":
+        if req_line[1] == "/" or req_line[1] == "/index.html":
             FILENAME = "Index.html"
             contents= read(FOLDER2 + FILENAME)
             self.send_response(200)
         else:
-            try:
-                file = req_line.split(".")[0]
-                FILENAME = file + ".html"
-                contents = read(FOLDER2 + FILENAME)
-                self.send_response(200)
-            except FileNotFoundError:
-                FILENAME = "error.html"
-                contents = read(FOLDER1 + FILENAME)
-                self.send_response(404)
-
+            FILENAME = "Error.html"
+            contents = read(FOLDER1 + FILENAME)
+            self.send_response(404)
 
 
         # Define the content-type header:
