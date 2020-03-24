@@ -30,39 +30,25 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             text = req_line.split("=")[1]
             value = text.split("&")[0]
             if "&" in text:
-                contents = f"""
-                <!DOCTYPE html>
-                <html lang="en">
-                  <head>
-                    <meta charset="utf-8">
-                    <title>RESULT</title>
-                  </head>
-                  <body>
-                    <h2>Echoing the received message</h2>
-                    <p>{value.upper()}</p>  
-                    <p><p>
-                    <a href="http://127.0.0.1:8080/">Main page</a>
-                    </form>
-                  </body>
-                </html>
-                """
+                final_msg = value.upper()
             else:
-                contents = f"""
-                <!DOCTYPE html>
-                <html lang="en">
-                  <head>
-                    <meta charset="utf-8">
-                    <title>RESULT</title>
-                  </head>
-                  <body>
-                    <h2>Echoing the received message</h2>
-                    <p>{value.lower()}</p>  
-                    <p><p>
-                    <a href="http://127.0.0.1:8080/">Main page</a>
-                    </form>
-                  </body>
-                </html>
-                """
+                final_msg = value.lower()
+            contents = f"""
+                            <!DOCTYPE html>
+                            <html lang="en">
+                              <head>
+                                <meta charset="utf-8">
+                                <title>RESULT</title>
+                              </head>
+                              <body>
+                                <h2>Echoing the received message</h2>
+                                <p>{final_msg}</p>  
+                                <p><p>
+                                <a href="http://127.0.0.1:8080/">Main page</a>
+                                </form>
+                              </body>
+                            </html>
+                            """
             self.send_response(200)
         else:
             contents = Path('error.html').read_text()
