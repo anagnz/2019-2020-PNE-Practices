@@ -10,6 +10,20 @@ port = 8080
 
 socketserver.TCPServer.allow_reuse_address = True
 
+def html(title):
+    return f"""
+                <!DOCTYPE html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <title>{title}</title>
+                  </head>
+                  <body style="background-color: lightblue">
+                    <p><p>
+                    </form>
+                  </body>
+                </html>
+                """
 
 def get_info(endpoint):
 
@@ -47,82 +61,28 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         elif init == "/listSpecies":
             limit = req_line.split("=")[1]
             info = get_info("info/species")["species"]
+            contents = html("LIST OF SPECIES IN THE BROWSER")
+            contents = contents + f"""<h>The total number of species in ensembl is: 267</h><br>"""
+            contents = contents + f"""<h>The limit you have selected is: {limit}</h><br>"""
+            contents = contents + f"""<h>The names of the species are:</h>"""
             if limit == "":
-                contents = f"""
-                            <!DOCTYPE html>
-                            <html lang="en">
-                              <head>
-                                <meta charset="utf-8">
-                                <title>LIST OF SPECIES IN THE BROWSER</title>
-                              </head>
-                              <body style="background-color: lightblue">
-                                <h>The total number of species in ensembl is: 267</h><br>
-                                <h>The limit you have selected is: {limit}</h>
-                                <p><p>
-                                </form>
-                              </body>
-                            </html>
-                            """
                 for element in info:
-                    contents = contents + f"""<p> • {element["common_name"]}</p>"""
-
-            if 267 >= int(limit):
-                contents = f"""
-                            <!DOCTYPE html>
-                            <html lang="en">
-                              <head>
-                                <meta charset="utf-8">
-                                <title>LIST OF SPECIES IN THE BROWSER</title>
-                              </head>
-                              <body style="background-color: lightblue">
-                                <h>The total number of species in ensembl is: 267</h><br>
-                                <h>The limit you have selected is: {limit}</h>
-                                <p><p>
-                                </form>
-                              </body>
-                            </html>
-                            """
+                    contents = contents + f"""<p> • {element["display_name"]}</p>"""
+            elif 267 >= int(limit):
                 counter = 0
                 for element in info:
                     if counter < int(limit):
-                        contents = contents + f"""<p> • {element["common_name"]}</p>"""
+                        contents = contents + f"""<p> • {element["display_name"]}</p>"""
                         counter = counter + 1
             else:
-                contents = f"""
-                            <!DOCTYPE html>
-                            <html lang="en">
-                              <head>
-                                <meta charset="utf-8">
-                                <title>LIST OF SPECIES IN THE BROWSER</title>
-                              </head>
-                              <body style="background-color: lightblue">
-                                <h>The total number of species in ensembl is: 267</h><br>
-                                <h>The limit you have selected is: {limit}</h>
-                                <p><p>
-                                </form>
-                              </body>
-                            </html>
-                            """
                 for element in info:
-                    contents = contents + f"""<p> • {element["common_name"]}</p>"""
+                    contents = contents + f"""<p> • {element["display_name"]}</p>"""
             self.send_response(200)
         elif init == "/karyotype":
             specie = req_line.split("=")[1]
             info = get_info("info/assembly/" + specie)["karyotype"]
-            contents = f"""
-                            <!DOCTYPE html>
-                            <html lang="en">
-                              <head>
-                                <meta charset="utf-8">
-                                <title>KARYOTYPE OF A SPECIFIC SPECIES</title>
-                              </head>
-                              <body style="background-color: lightblue">
-                                <h>The names of the chromosomes are: </h><br>
-                                <p><p>
-                                </form>
-                              </body>
-                            </html>
-                            """
+            contents = html("KARYOTYPE OF A SPECIFIC SPECIES")
+            contents = contents + f"""<h> The names of the chromosomes are: </h>"""
             for element in info:
                 contents = contents + f"""<p> • {element}</p>"""
             self.send_response(200)
@@ -133,20 +93,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             info = get_info("info/assembly/" + specie)["top_level_region"]
             for element in info:
                 if element["name"] == number:
-                    contents = f"""
-                                <!DOCTYPE html>
-                                <html lang="en">
-                                  <head>
-                                    <meta charset="utf-8">
-                                    <title>LENGTH OF THE SELECTED</title>
-                                  </head>
-                                  <body style="background-color: lightblue">
-                                    <h>The length of the chromosome is: {element["length"]} </h><br>
-                                    <p><p>
-                                    </form>
-                                  </body>
-                                </html>
-                                """
+                    contents = html("LENGTH OF THE CHROMOSOME SELECTED")
+                    contents = contents + f"""<h> The length of the chromosome is: {element["length"]}</h>"""
             self.send_response(200)
         else:
             contents = Path('error.html').read_text()
