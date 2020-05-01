@@ -109,10 +109,46 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     contents = contents + f"""<p> • {element["common_name"]}</p>"""
             self.send_response(200)
         elif init == "/karyotype":
-            contents = get_info("")
+            specie = req_line.split("=")[1]
+            info = get_info("info/assembly/"+ specie)["karyotype"]
+            contents = f"""
+                            <!DOCTYPE html>
+                            <html lang="en">
+                              <head>
+                                <meta charset="utf-8">
+                                <title>KARYOTYPE OF A SPECIFIC SPECIES</title>
+                              </head>
+                              <body style="background-color: lightblue">
+                                <h>The names of the chromosomes are: </h><br>
+                                <p><p>
+                                </form>
+                              </body>
+                            </html>
+                            """
+            for element in info:
+                contents = contents + f"""<p> • {element}</p>"""
             self.send_response(200)
         elif init == "/chromosomeLength":
-            contents = get_info("")
+            number = req_line.split("=")[2]
+            values = req_line.split("=")[1]
+            specie = values.split("&")[0]
+            info = get_info("info/assembly/" + specie)["top_level_region"]
+            for element in info:
+                if element["name"] == number:
+                    contents = f"""
+                                <!DOCTYPE html>
+                                <html lang="en">
+                                  <head>
+                                    <meta charset="utf-8">
+                                    <title>LENGTH OF THE SELECTED</title>
+                                  </head>
+                                  <body style="background-color: lightblue">
+                                    <h>The length of the chromosome is: {element["length"]} </h><br>
+                                    <p><p>
+                                    </form>
+                                  </body>
+                                </html>
+                                """
             self.send_response(200)
         else:
             contents = Path('error.html').read_text()
