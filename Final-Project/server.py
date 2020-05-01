@@ -18,7 +18,6 @@ def get_info(endpoint):
     parameters = "?content-type=application/json"
     print(f"\nConnecting to server: {server}:{port}\n")
 
-    # Connect with the server
     conn = http.client.HTTPConnection(server)
 
     try:
@@ -30,7 +29,6 @@ def get_info(endpoint):
     r1 = conn.getresponse()
     print(f"Response received!: {r1.status} {r1.reason}\n")
     data1 = r1.read().decode("utf-8")
-    # we change the format of the info to JSON format
     response = json.loads(data1)
     return response
 
@@ -110,7 +108,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
         elif init == "/karyotype":
             specie = req_line.split("=")[1]
-            info = get_info("info/assembly/"+ specie)["karyotype"]
+            info = get_info("info/assembly/" + specie)["karyotype"]
             contents = f"""
                             <!DOCTYPE html>
                             <html lang="en">
@@ -168,7 +166,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 # -- Set the new handler
 Handler = TestHandler
 
-# -- Open the socket server
 with socketserver.TCPServer(("", port), Handler) as httpd:
 
     print("Serving at PORT", port)
