@@ -94,15 +94,15 @@ http://127.0.0.1:8080/listSpecies?limit=6
         <p>
             <h>The total number of species in ensembl is: 267</h>
             <br>
-            <h>The limit you have selected is: 267</h>
+            <h>The limit you have selected is: 6</h>
             <br>
             <h>The names of the species are:</h>
         </p>
-        <p> • pig</p>
-        <p> • American pika</p>
+        <p> • Pig - Rongchang</p>
+        <p> • Pika</p>
         <p> • African ostrich</p>
         <p> • Nile tilapia</p>
-        <p> • channel catfish</p>
+        <p> • Channel catfish</p>
         <p> • West African mud turtle</p>
     </body>
 </html>
@@ -132,7 +132,6 @@ http://127.0.0.1:8080/listSpecies?limit=
             <br>
             <h>The names of the species are:</h>
         </p>
-        <p> • Ferret</p>
         <p>• Pig</p>
         <p>• Periophthalmus magnuspinnatus</p>
         <p>• Horned golden-line barbel</p>
@@ -409,7 +408,6 @@ http://127.0.0.1:8080/listSpecies?limit=
         <p>• Macaque</p>
         <p>• Siberian musk deer</p>
         <p>• Denticle herring</p>
-        <p>• African ostrich</p>
         <p>• Chinese softshell turtle</p>
         <p>• Painted turtle</p>
         <p>• Bushbaby</p>
@@ -489,3 +487,4 @@ http://127.0.0.1:8080/chromosomeLength?specie=dog&chromo=3
         </p>
     </body>
 </html>
+

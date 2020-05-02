@@ -5,7 +5,7 @@
     <title>Welcome!!</title>
   </head>
   <h1>Browsing Human and Vertebrates genome</h1>
-  <h2>BASIC Level Services</h2>
+  <h2>BASIC & MEDIUM Level Services</h2>
   <body style="background-color: lightpink">
   <form action="listSpecies" method="get">
       1) List of species in the genome database<br><br>
@@ -21,6 +21,28 @@
       3) Chromosome Length<br><br>
       Select the species: <input type="text" name="specie"><br><br>
       Select a chromosome: <input type="text" name="chromo"><br><br>
+      <input type="submit" value="SEND"><br><hr><br>
+        </form>
+  <form action="geneSeq" method="get">
+      4) Sequence of a human gene<br><br>
+      Select a gene: <input type="text" name="gene"><br><br>
+      <input type="submit" value="SEND"><br><hr><br>
+        </form>
+  <form action="geneInfo" method="get">
+      5) Information about a human gene:<br><br>
+      Select a gene: <input type="text" name="gene"><br><br>
+      <input type="submit" value="SEND"><br><hr><br>
+        </form>
+  <form action="geneCalc" method="get">
+      6) Total length and % of bases of a human gene:<br><br>
+      Select a gene: <input type="text" name="gene"><br><br>
+      <input type="submit" value="SEND"><br><hr><br>
+        </form>
+  <form action="geneList" method="get">
+      7) List of the genes located in a chromosome<br><br>
+      Select a chromosome: <input type="text" name="chromo"><br><br>
+      Select the start: <input type="text" name="start"><br><br>
+      Select the end: <input type="text" name="end"><br><br>
       <input type="submit" value="SEND"><br><br>
         </form>
   </body>
