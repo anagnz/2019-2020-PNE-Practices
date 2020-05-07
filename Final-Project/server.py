@@ -4,13 +4,17 @@ import socketserver
 import termcolor
 from pathlib import Path
 import json
+from Seq1 import Seq
 
 
 port = 8080
 
 socketserver.TCPServer.allow_reuse_address = True
 
-def html(title):
+list_bases = ["A", "C", "G", "T"]
+
+
+def html(title, color):
     return f"""
                 <!DOCTYPE html>
                 <html lang="en">
@@ -18,18 +22,19 @@ def html(title):
                     <meta charset="utf-8">
                     <title>{title}</title>
                   </head>
-                  <body style="background-color: lightblue">
+                  <body style="background-color: {color}">
                     <p><p>
                     </form>
                   </body>
                 </html>
                 """
 
+
 def get_info(endpoint):
 
     port = 8080
     server = 'rest.ensembl.org'
-    parameters = "?content-type=application/json"
+    parameters = "content-type=application/json"
     print(f"\nConnecting to server: {server}:{port}\n")
 
     conn = http.client.HTTPConnection(server)
@@ -60,29 +65,29 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
         elif init == "/listSpecies":
             limit = req_line.split("=")[1]
-            info = get_info("info/species")["species"]
-            contents = html("LIST OF SPECIES IN THE BROWSER")
-            contents = contents + f"""<h>The total number of species in ensembl is: 267</h><br>"""
-            contents = contents + f"""<h>The limit you have selected is: {limit}</h><br>"""
-            contents = contents + f"""<h>The names of the species are:</h>"""
+            info = get_info("info/species?")["species"]
+            contents = html("LIST OF SPECIES IN THE BROWSER", "lightblue")
+            contents += f"""<h>The total number of species in ensembl is: 267</h><br>"""
+            contents += f"""<h>The limit you have selected is: {limit}</h><br>"""
+            contents += f"""<h>The names of the species are:</h>"""
             if limit == "":
                 for element in info:
-                    contents = contents + f"""<p> • {element["display_name"]}</p>"""
+                    contents += f"""<p> • {element["display_name"]}</p>"""
             elif 267 >= int(limit):
                 counter = 0
                 for element in info:
                     if counter < int(limit):
-                        contents = contents + f"""<p> • {element["display_name"]}</p>"""
-                        counter = counter + 1
+                        contents += f"""<p> • {element["display_name"]}</p>"""
+                        counter += 1
             else:
                 for element in info:
-                    contents = contents + f"""<p> • {element["display_name"]}</p>"""
+                    contents += f"""<p> • {element["display_name"]}</p>"""
             self.send_response(200)
         elif init == "/karyotype":
             specie = req_line.split("=")[1]
-            info = get_info("info/assembly/" + specie)["karyotype"]
-            contents = html("KARYOTYPE OF A SPECIFIC SPECIES")
-            contents = contents + f"""<h> The names of the chromosomes are: </h>"""
+            info = get_info("info/assembly/" + specie + "?")["karyotype"]
+            contents = html("KARYOTYPE OF A SPECIFIC SPECIES", "lightblue")
+            contents += f"""<h> The names of the chromosomes are: </h>"""
             for element in info:
                 contents = contents + f"""<p> • {element}</p>"""
             self.send_response(200)
@@ -90,11 +95,55 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             number = req_line.split("=")[2]
             values = req_line.split("=")[1]
             specie = values.split("&")[0]
-            info = get_info("info/assembly/" + specie)["top_level_region"]
+            info = get_info(f"info/assembly/" + specie + "?")["top_level_region"]
             for element in info:
                 if element["name"] == number:
-                    contents = html("LENGTH OF THE CHROMOSOME SELECTED")
-                    contents = contents + f"""<h> The length of the chromosome is: {element["length"]}</h>"""
+                    contents = html("LENGTH OF THE CHROMOSOME SELECTED", "lightblue")
+                    contents += f"""<h> The length of the chromosome is: {element["length"]}</h>"""
+            self.send_response(200)
+        elif init == "/geneSeq":
+            gene = req_line.split("=")[1]
+            gene_id = get_info(f"/xrefs/symbol/homo_sapiens/{gene}?")[0]["id"]
+            info = get_info(f"/sequence/id/{gene_id}?")
+            contents = html("GENE SEQUENCE", "lightyellow")
+            contents += f'<p> The sequence of gene {gene} is: </p>'
+            contents += f'<textarea rows = "100" "cols = 500"> {info["seq"]} </textarea>'
+            self.send_response(200)
+        elif init == "/geneInfo":
+            gene = req_line.split("=")[1]
+            gene_id = get_info(f"/xrefs/symbol/homo_sapiens/{gene}?")[0]["id"]
+            info = get_info(f"/lookup/id/{gene_id}?")
+            contents = html("INFO ABOUT A GENE", "lightyellow")
+            contents += f'<h1> Information about the introduced gene: {gene}</h1>'
+            contents += f'<p> The start point is: {info["start"]}</p>'
+            contents += f'<p> The end point is: {info["end"]}</p>'
+            contents += f'<p> The length of the gene is: {info["end"]-info["start"]}</p>'
+            contents += f'<p> The id of the gene is: {info["id"]}</p>'
+            contents += f'<p> The chromosome of that gene is: {info["seq_region_name"]}</p>'
+            self.send_response(200)
+        elif init == "/geneCalc":
+            gene = req_line.split("=")[1]
+            gene_id = get_info(f"/xrefs/symbol/homo_sapiens/{gene}?")[0]["id"]
+            info = get_info(f"/sequence/id/{gene_id}?")["seq"]
+            sequence = Seq(info)
+            contents = html("BASES CALCULATION", "lightyellow")
+            contents += f'<h1> Calculations over the introduced gene: {gene}</h1>'
+            contents += f'<p> Total length of this gene is: {sequence.len()}</p>'
+            contents += f'<p> The percentage of each base in the sequence of this gene is:</p>'
+            for base in list_bases:
+                contents += f"<p>{base}: ({sequence.count_base(base)[1]}%)</p>"
+            self.send_response(200)
+        elif init == "/geneList":
+            values = req_line.split("?")[1]
+            chromo, start, end = values.split("&")
+            chromo_value = chromo.split("=")[1]
+            start_value = start.split("=")[1]
+            end_value = end.split("=")[1]
+            info = get_info(f"/overlap/region/human/{chromo_value}:{start_value}-{end_value}?feature=gene;")
+            contents = html("LIST OF GENES OF A CHROMOSOME", "lightyellow")
+            contents += f'<h2> List of genes located in the introduced chromosome: {chromo_value}</h2>'
+            for element in info:
+                contents += f'<p>- {element["external_name"]}</p>'
             self.send_response(200)
         else:
             contents = Path('error.html').read_text()
@@ -108,10 +157,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         return
 
 
-# ------------------------
-# - Server MAIN program
-# ------------------------
-# -- Set the new handler
 Handler = TestHandler
 
 with socketserver.TCPServer(("", port), Handler) as httpd:
