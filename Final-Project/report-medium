@@ -1,7 +1,7 @@
 Test report
 ========================================================================================================================
 
----> listSpecies endpoint
+---> Main page endpoint
 
 * TEST 1:
 
@@ -12,3 +12,296 @@ Index of options to choose what information the user wants to be shown.
 http://127.0.0.1:8080/
 
 * output:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!!</title>
+    </head>
+    <body style="background-color: lightpink;">
+      <h1>Browsing Human and Vertebrates genome</h1>
+      <h2>BASIC & MEDIUM Level Services</h2>
+      <form action="listSpecies" method="get">
+        "
+              1) List of species in the genome database"
+        <br>
+        <br>
+        "
+              Limit: "
+        <input type="text" name="limit">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+      </form>
+      <form action="karyotype" method="get">
+        "
+              2) Information about the karyotype:"
+        <br>
+        <br>
+        "
+              Select the species: "
+        <input type="text" name="specie">
+        <br>
+        <br>
+          <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+        </form>
+        <form action="chromosomeLength" method="get">
+          "
+                3) Chromosome Length"
+        <br>
+        <br>
+          "
+                Select a chromosome: "
+        <input type="text" name="specie">
+        <br>
+        <br>
+        <input type="text" name="chromo">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <br>
+        </form>
+        <form action="geneSec" method="get">
+        "
+              4) Sequence of a human gene"
+        <br>
+        <br>
+        "
+              Select a gene: "
+        <input type="text" name="gene">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+      </form>
+      <form action="geneInfo" method="get">
+        "
+              5) Information about a human gene"
+        <br>
+        <br>
+        "
+              Select a gene: "
+        <input type="text" name="gene">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+      </form>
+      <form action="geneCalc" method="get">
+        "
+              6) Total length and % of bases of a human gene"
+        <br>
+        <br>
+        "
+              Select a gene: "
+        <input type="text" name="gene">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+      </form>
+      <form action="geneList" method="get">
+        "
+              7) List  of the genes located in a chromosome"
+        <br>
+        <br>
+        "
+              Select a chromosome: "
+        <input type="text" name="chromo">
+        <br>
+        <br>
+        "
+              Select the start: "
+        <input type="text" name="start">
+        <br>
+        <br>
+        "
+              Select the end: "
+        <input type="text" name="end">
+        <br>
+        <br>
+        <input type="submit" value="SEND">
+        <br>
+        <hr>
+        <br>
+      </form>
+  </body>
+</html>
+
+
+---> geneSeq endpoint
+
+* TEST 2:
+
+The sequence of the introduced human gene must appear.
+
+* Input:
+
+http://127.0.0.1:8080/geneSeq?gene=FRAT1
+
+* output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GENE SEQUENCE</title>
+    </head>
+    <body style="background-color: lightyellow">
+        <p></p>
+        <p>
+
+
+
+                        </p>
+        <p> The sequence of gene FRAT1 is:  </p>
+        <textarea rows="100" "cols=500"">
+        " CGGCTCCCGCGGCTGCAGGCGCGCGGCTAGAGTGCCTGGCGGGCTCCGGCTTCCGCGTCCGCCCCGGCCCCGGTCCAGACTTAGTCTTCAGCTCCGCGCCCGCTCCGCCGCGGCCCACCGCGCCCGCCGGCAGCCGAGCCCCCAGCGACGCCCGCACAGCTCCGGGTGCCCAGACAGGGGGCCATGCCGTGCCGGAGGGAGGAGGAAGAGGAAGCCGGCGAGGAGGCGGAGGGGGAGGAAGAGGAGGAGGACAGCTTCCTCCTACTGCAGCAGTCAGTGGCGCTGGGCAGCTCGGGCGAGGTGGACCGGCTGGTGGCCCAGATCGGCGAGACGCTGCAGCTGGACGCGGCGCAGCACAGCCCGGCCTCGCCGTGCGGGCCCCCGGGGGCGCCGCTGCGGGCCCCGGGGCCCCTGGCTGCGGCGGTGCCGGCGGACAAGGCCAGGTCCCCGGCGGTGCCGCTGCTGCTGCCGCCCGCGTTGGCGGAGACTGTGGGCCCGGCGCCCCCTGGGGTCCTGCGCTGCGCCCTGGGGGACCGCGGCCGCGTGCGGGGCCGCGCTGCGCCCTACTGCGTGGCCGAGCTCGCCACAGGCCCCAGCGCGCTGTCCCCACTGCCCCCTCAGGCCGACCTTGATGGGCCTCCGGGAGCTGGCAAGCAGGGCATCCCGCAGCCGCTGTCGGGTCCGTGCCGGCGAGGATGGCTCCGGGGCGCCGCCGCCTCCCGCCGCCTGCAGCAGCGACGCGGGTCCCAACCAGAAACCCGCACAGGCGACGACGACCCGCACCGGCTTCTGCAGCAGCTAGTGCTCTCTGGAAACCTCATCAAGGAGGCCGTGCGAAGGCTTCATTCGCGACGGCTGCAGTTACGTGCAAAGCTTCCCCAACGCCCGCTCCTGGGACCTCTGTCGGCCCCGGTGCATGAACCCCCTTCGCCTCGCAGCCCTCGCGCGGCCTGCAGTGACCCTGGCGCCTCCGGGAGGGCGCAGCTCAGAACTGGCGACGGCGTTCTTGTGCCTGGCAGCTAACACGCCCGGGGTGGCCACAGCGCCAGCCTCAGACTGGAGGGCAAGGGGTTCCCTTGAGGGCTGCAGTTCTACTCAGGCTGGTGGAGAACTCTGGCTTTTGGAAGCGAGAGTAAAAAGCTAATGACGAGGAACCGAAAAATCGCGAGTGTTTCGCGGGTAACTGGGGTTGAGGGCCAAAATATTTGGAATGAAGGACTTTGGCCCTATTTAAGGCAGATTTTACAGAGCGCACCTCAAACGTACAAGTCAGTAGGACTCCTTATTTGGCGTGACCCGACCTGGCCGCGGAGCCTGCATTTCCTCGCAGCCTCTCAGTGCCCTCCAGCCCCGCGACCATGTGGCCACAATCCACGCTTCTCCGGATCGCGGTGCGCCGGAACCACGGAGGATGATGCCAGTTACTTGCTTTACCTTTTCAGGGCTGGCTCCTGATCCACTTTGGGGGAGGAGAACATGAGTAGATAATTTCAGGGTGCAGCCCAATCTGCCAGACTTAAAAAAACCATCTTGTGTCTTTGGAGGTGCTGCTTAATACCAAACATGCGGTGCCATGAAGGGACCCTTTGGGGGTTGAATAGGAGTTAACCCCTGCGCTCTCTTTGCAACTGTCTCTCTTCTCAGAGTGGTGGGGGAAGGCTGTACGACACGGGTGGGGAAAGGAGGTGGGGGCGGGGAGTATTGAATGGTGGTGGAAGGGTAGAGAGGCGCGGAGTGAACCCCACGCCCTGTCTAAAGTGTATTTTCAGAGCCGGCCCGCCTCTCCTCGGTTCAAGGTCACTGTTTCCTGGGCACGCACTGGGTTGCGGGACAGAGTAGCCAGGTTCTGCCGGTGCTCGGAGAAGAGCGCAGTGTTTTGCAAGTGCTGGAGTCTCCTGAGGACACGCGCGTCGCCGCCACCGCGGGTGTGGGAAAGCGCGGACGTGCTGGGCGGCTGTGCTTCGGTAGGCGACCACCGCCCCTGGCCGCGCTCCGGGCTTTCACGGAAACTCCCGAGACCGGGCCCTGGGTTCCTCCTCTCCTACTCGGCTCTGCAGTCCTACTCAAGCGGGTGGCTCTGGGATCCTGGGGGCCTGGGTTGGGGGCTAGGGAGACGCCATGTGATGGACACTCCAGGGACACACAGCCTAGCACAGCAGCTTATAATGGGCTCTCCGGGGCCATTTGCAATAACAGCTGCAATTCCCTGGATAGACGAGTTGATTTCCTCCCTCTGCCCCTCCCCCAGCCATGCCAGCTGGCCTTTGTAAGTGCAGGAAACCGAGTAGAAAATGTGACCCTCCAAATGGAGAAGCTGCAGGCTTTGCCATTGTGAACCATGGTGAAGTGCTTGGAACATACTGTTCACTCACTCTAAAGGCGCTGAGACTGTGCTGTTGTTCTCGTTTTTATAGTCAATGGCTTGTTCATCATCCAGATGTGGCTACTGACATATCTACACTTCGCACCGGAGTGTCTGGAATTGTGGCTATCCTGATTATAGGATTTTAACTTAACTGAAATGCCTGCTTTGAATAAATGTGTTGGGTTTTTTGTTTGGTTTTATTTTATACTTGCCATCAGTGAAAAAGATGTACAGAACACATTTCTCTGATCTCCATAAACATGAAAACACTTGAAATCTC "
+        <textarea>
+    </body>
+</html>
+
+
+---> geneInfo endpoint
+
+* TEST 3:
+
+Info about the introduced gene such as its start and end points, length, id and chromosome to which it belongs must appear.
+
+* Input:
+
+http://127.0.0.1:8080/geneInfo?gene=ADA
+
+* output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>INFO ABOUT A GENE</title>
+    </head>
+    <body style="background-color: lightyellow">
+        <p></p>
+        <p>
+
+
+                        </p>
+        <h1> Information about the introduced gene: ADA</h1>
+        <p> The start point is: 44619522</p>
+        <p> The end point is: 44652233</p>
+        <p> The id of the gene is: ENSG00000196839</p>
+        <p> The chromosome of that gene is: 20</p>
+    </body>
+</html>
+
+
+---> geneCalc endpoint
+
+* TEST 4:
+
+The lenght and the percentage of each base of the sequence of the introduced gene must appear.
+
+* Input:
+
+http://127.0.0.1:8080/geneCalc?gene=FXN
+
+* output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BASES CALCULATION</title>
+    </head>
+    <body style="background-color: lightyellow">
+        <p></p>
+        <p>
+
+
+                        </p>
+        <h1> Calculations over the introduced gene: FXN</h1>
+        <p> Total length of this gene is: 219441</p>
+        <p> The percentage of each base in the sequence of this gene is:</p>
+        <p> A: (26.9%)</p>
+        <p> C: (21.6%)</p>
+        <p> G: (22.4%)</p>
+        <p> T: (29.0%)</p>
+    </body>
+</html>
+
+
+---> geneList endpoint
+
+* TEST 5:
+
+A list of the genes that are located in the introduced human chromosome (between the start and the end that has also been introduced) must appear
+
+* Input:
+
+http://127.0.0.1:8080/geneList?chromo=3&start=0&end=30000
+
+* output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LIST OF GENES OF A CHROMOSOME</title>
+    </head>
+    <body style="background-color: lightyellow">
+        <p></p>
+        <p>
+
+
+                        </p>
+        <H2> List of genes located in the introduced chromosome: 3</h2>
+        <p> - LINC01986</p>
+    </body>
+</html>
+
+
+* TEST 6: Another try with the same endpoint to check that it works with more human chromosomes.
+
+* Input:
+
+http://127.0.0.1:8080/geneList?chromo=Y&start=0&end=450000
+
+* output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LIST OF GENES OF A CHROMOSOME</title>
+    </head>
+    <body style="background-color: lightyellow">
+        <p></p>
+        <p>
+
+
+                        </p>
+        <H2> List of genes located in the introduced chromosome: Y</h2>
+        <p> - AL954722.1</p>
+        <p> - PLCXD1</p>
+        <p> - GTPBP6</p>
+        <p> - LINC00685</p>
+        <p> - PPP2R3B</p>
+        <p> - AL732314.8</p>
+        <p> - AL732314.1</p>
+        <p> - AL732314.6</p>
+    </body>
+</html>
