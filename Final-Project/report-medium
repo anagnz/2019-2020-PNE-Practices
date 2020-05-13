@@ -203,6 +203,7 @@ http://127.0.0.1:8080/geneInfo?gene=ADA
         <h1> Information about the introduced gene: ADA</h1>
         <p> The start point is: 44619522</p>
         <p> The end point is: 44652233</p>
+        <p> The length of the gene is: 32711</p>
         <p> The id of the gene is: ENSG00000196839</p>
         <p> The chromosome of that gene is: 20</p>
     </body>
