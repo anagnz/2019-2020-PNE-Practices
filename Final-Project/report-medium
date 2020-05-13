@@ -1,0 +1,14 @@
+Test report
+========================================================================================================================
+
+---> listSpecies endpoint
+
+* TEST 1:
+
+Index of options to choose what information the user wants to be shown.
+
+* Input:
+
+http://127.0.0.1:8080/
+
+* output:

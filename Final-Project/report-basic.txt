@@ -1,7 +1,7 @@
 Test report
 ========================================================================================================================
 
----> listSpecies endpoint
+---> Main page endpoint
 
 * TEST 1:
 
@@ -72,6 +72,8 @@ http://127.0.0.1:8080/
   </body>
 </html>
 
+
+---> listSpecies endpoint
 
 * TEST 2:
 
@@ -420,6 +422,9 @@ http://127.0.0.1:8080/listSpecies?limit=
     </body>
 </html>
 
+
+---> karyotype endpoint
+
 * TEST 4:
 
 Karyotype of the species introduced should be shown.
@@ -463,6 +468,9 @@ http://127.0.0.1:8080/karyotype?specie=cat
         <p>• MT</p>
     </body>
 </html>
+
+
+---> chromosomeLength endpoint
 
 * TEST 5:
 
