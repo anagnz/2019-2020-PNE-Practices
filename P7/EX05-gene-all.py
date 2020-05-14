@@ -77,6 +77,5 @@ for element in dict_genes:
             freq_counter = sequence.count_base(base)[0]
             freq_base = base
 
-
     termcolor.cprint(f"Most frequent Base: ", "green", end="")
     print(freq_base)
