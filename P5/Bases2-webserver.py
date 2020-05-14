@@ -24,26 +24,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         termcolor.cprint(self.requestline, 'green')
 
-        FOLDER = "../P5/"
+        folder = "../P5/"
 
         req_line = self.requestline.split()[1]
 
         if req_line == "/" or req_line == "/index.html":
-            FILENAME = "Index.html"
-            contents= read(FOLDER + FILENAME)
+            filename = "Index.html"
+            contents = read(folder + filename)
             self.send_response(200)
         else:
             try:
                 file = req_line.split(".")[0]
-                FILENAME = file + ".html"
-                contents = read(FOLDER + FILENAME)
+                filename = file + ".html"
+                contents = read(folder + filename)
                 self.send_response(200)
             except FileNotFoundError:
-                FILENAME = "error.html"
-                contents = read(FOLDER + FILENAME)
+                filename = "error.html"
+                contents = read(folder + filename)
                 self.send_response(404)
-
-
 
         # Define the content-type header:
         self.send_header('Content-Type', 'text/html')
