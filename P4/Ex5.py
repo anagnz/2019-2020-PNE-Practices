@@ -37,25 +37,25 @@ def process_client(s):
     # blank line
     # Body (content to send)
 
-    FOLDER = "../P4/"
+    folder = "../P4/"
     file_request = req_line.split()[1]
     # file_request is like req_line (GET /info/A HTTP/1.1) only with (/info/A) or  (/info/C)
 
     if "/info/A" in file_request:
-        FILENAME = "A.html"
-        body = read(FOLDER + FILENAME)  # read() is the function read_fasta_data() from other practice
+        filename = "A.html"
+        body = read(folder + filename)  # read() is the function read_fasta_data() from other practice
     elif "/info/C" in file_request:
-        FILENAME = "C.html"
-        body = read(FOLDER + FILENAME)
+        filename = "C.html"
+        body = read(folder + filename)
     elif "/info/T" in file_request:
-        FILENAME = "T.html"
-        body = read(FOLDER + FILENAME)
+        filename = "T.html"
+        body = read(folder + filename)
     elif "/info/G" in file_request:
-        FILENAME = "G.html"
-        body = read(FOLDER + FILENAME)
+        filename = "G.html"
+        body = read(folder + filename)
     else:
-        FILENAME = "Error.html"
-        body = read(FOLDER + FILENAME)
+        filename = "Error.html"
+        body = read(folder + filename)
 
     # This new contents are written in HTML language
     # -- Status line: We respond that everything is ok (200 code)
