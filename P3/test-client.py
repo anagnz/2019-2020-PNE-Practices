@@ -1,5 +1,3 @@
-from Seq1 import Seq
-
 from Client0 import Client
 
 PRACTICE = 3
