@@ -12,6 +12,5 @@ PORT = 8081
 # -- Create a client object
 c = Client(IP, PORT)
 
-#Print the IP and PORTs
+# Print the IP and PORTs
 print(c)
-

@@ -1,5 +1,4 @@
 from Seq1 import Seq
-
 from Client0 import Client
 
 PRACTICE = 2
@@ -28,18 +27,18 @@ c2.talk("Sending FRAT1 Gene to the Server in fragments of 10 bases...")
 print(f"Gene FRAT1: {str(sequence)}")
 
 # ---Creating fragments
-Fragment_1 = str(sequence)[0:10]
-Fragment_2 = str(sequence)[10:20]
-Fragment_3 = str(sequence)[20:30]
-Fragment_4 = str(sequence)[30:40]
-Fragment_5 = str(sequence)[40:50]
-Fragment_6 = str(sequence)[50:60]
-Fragment_7 = str(sequence)[60:70]
-Fragment_8 = str(sequence)[70:80]
-Fragment_9 = str(sequence)[80:90]
-Fragment_10 = str(sequence)[90:100]
+Frag_1 = str(sequence)[0:10]
+Frag_2 = str(sequence)[10:20]
+Frag_3 = str(sequence)[20:30]
+Frag_4 = str(sequence)[30:40]
+Frag_5 = str(sequence)[40:50]
+Frag_6 = str(sequence)[50:60]
+Frag_7 = str(sequence)[60:70]
+Frag_8 = str(sequence)[70:80]
+Frag_9 = str(sequence)[80:90]
+Frag_10 = str(sequence)[90:100]
 
-list_fragments = [Fragment_1, Fragment_2, Fragment_3, Fragment_4, Fragment_5, Fragment_6, Fragment_7, Fragment_8, Fragment_9, Fragment_10]
+list_fragments = [Frag_1, Frag_2, Frag_3, Frag_4, Frag_5, Frag_6, Frag_7, Frag_8, Frag_9, Frag_10]
 
 # ---Printing them on the client's console
 index = 0

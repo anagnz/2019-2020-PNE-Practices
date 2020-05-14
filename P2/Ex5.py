@@ -16,7 +16,7 @@ c = Client(IP, PORT)
 s1 = Seq()
 folder = "../Session-04/"
 EXT = ".txt"
-sequence = s1.read_fasta(folder+ "U5"+EXT)
+sequence = s1.read_fasta(folder+"U5"+EXT)
 
 
 print(f"Connection to SERVER at {c.ip}, PORT: {c.port}")

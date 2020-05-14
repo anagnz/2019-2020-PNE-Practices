@@ -67,7 +67,7 @@ while True:
             cs.send(str(sequence).encode())
             print(f"Total lenght: {sequence.len()}")
             for base in list_bases:
-                print(f"{base}: {sequence.count_base(base)[0]} ({sequence.count_base(base)[1]}%)", end= "\n")
+                print(f"{base}: {sequence.count_base(base)[0]} ({sequence.count_base(base)[1]}%)", end="\n")
 
         elif msg.startswith("COMP"):
             termcolor.cprint("COMP", "green")
