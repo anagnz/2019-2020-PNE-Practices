@@ -9,9 +9,6 @@ from Seq1 import Seq
 
 list_bases = ["A", "C", "G", "T"]
 
-def transform(anydict):
-    transformed = json.dumps(anydict)
-    return transformed
 
 def dict_listSpecies(cut_listSpecies, total_listSpecies, limit):
     contents = {
@@ -19,22 +16,9 @@ def dict_listSpecies(cut_listSpecies, total_listSpecies, limit):
         "limit": limit,
         "list_species": cut_listSpecies,
     }
-    return transform(contents)
+    client_dict = json.dumps(contents)
+    return client_dict
 
-def splitting(word, string, number):
-    splitted = word.split(string)
-    new_word = splitted[number]
-    return new_word
-
-
-def deletingjson(link1):
-    link = splitting(link1, "&json=", 0)
-    return link
-
-
-def value(json1):
-    jsonvalue = splitting(json1, "&json=", 1)
-    return jsonvalue
 
 def html(title, color):
     return f"""
