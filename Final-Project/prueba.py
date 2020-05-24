@@ -10,11 +10,11 @@ from Seq1 import Seq
 list_bases = ["A", "C", "G", "T"]
 
 
-def dict_listSpecies(cut_listSpecies, total_listSpecies, limit):
+def dict_listSpecies(limit):
     contents = {
-        "total_number_of_species": len(total_listSpecies),
+        "total_number_of_species": 267,
         "limit": limit,
-        "list_species": cut_listSpecies,
+        "list_species": "gato_listo"
     }
     client_dict = json.dumps(contents)
     return client_dict
@@ -86,10 +86,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 if len(values) == 2:
                     input, json = values
                     limit = input.split("=")[1]
-                    counter = 0
+                    #counter = 0
                     if json == "json=1":
                         if 267 > int(limit):
-                            contents = dict_listSpecies("buenas tardes", 267, limit)
+                            contents = dict_listSpecies(int(limit))
                             """species_dict = {}
                             for element in info:
                                 species_dict.update({counter: element["display_name"]})
@@ -310,7 +310,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = Path('error.html').read_text()
             self.send_response(200)
 
+        list_resources = ["/", "/listSpecies", "/karyotype", "/chromosomeLength",
+                          "/geneSeq", "/geneInfo", "/geneCalc", "/geneList"]
 
+        if init in list_resources:
+            if len(values) == 2:
+                type = "application/json"
+            else:
+                type = "text/html"
         self.send_header('Content-Type', type)
         self.send_header('Content-Length', len(str.encode(contents)))
         self.end_headers()
