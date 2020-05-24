@@ -10,11 +10,18 @@ from Seq1 import Seq
 list_bases = ["A", "C", "G", "T"]
 
 
-def dict_listSpecies(limit):
+def dict_listSpecies(limit, list):
     contents = {
-        "total_number_of_species": 267,
-        "limit": limit,
-        "list_species": "gato_listo"
+        "Total number of species": 267,
+        "Limit selected": limit,
+        "List of species": list
+    }
+    client_dict = json.dumps(contents)
+    return client_dict
+
+def dict_karyotype(list):
+    contents = {
+        "The names of the chromosomes are": list
     }
     client_dict = json.dumps(contents)
     return client_dict
@@ -86,24 +93,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 if len(values) == 2:
                     input, json = values
                     limit = input.split("=")[1]
-                    #counter = 0
                     if json == "json=1":
+                        list = []
+                        counter = 0
                         if 267 > int(limit):
-                            contents = dict_listSpecies(int(limit))
-                            """species_dict = {}
                             for element in info:
-                                species_dict.update({counter: element["display_name"]})
+                                if counter < int(limit):
+                                    list.append(element["display_name"])
+                                    counter += 1
+                            contents = dict_listSpecies(limit, list)
+                        elif limit == " " :
+                            for element in info:
+                                list.append(element["display_name"])
                                 counter += 1
-                        data = {'ListSpecies': species_dict}
-                        contents = json.dumps(data)"""
-                        type = 'application/json'
+                            contents = dict_listSpecies(limit, list)
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
                         self.send_response(404)
 
                 elif len(values) == 1:
-                    type = 'text/html'
                     limit = req_line.split("=")[1]
                     contents = html("LIST OF SPECIES IN THE BROWSER", "lightblue")
                     contents += f"""<h>The total number of species in ensembl is: 267</h><br>"""
@@ -132,9 +141,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     specie = input.split("=")[1]
                     info = get_info("info/assembly/" + specie + "?")["karyotype"]
                     if json == "json=1":
-                        contents = json.dumps(info)
+                        list = []
+                        for element in info:
+                            list.append(element)
+                        contents = dict_karyotype(list)
                         self.send_response(200)
-                        type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
                         self.send_response(404)

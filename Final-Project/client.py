@@ -43,3 +43,8 @@ while valid:
         limit = input("Type the number of species you want to be shown: ")
         url = "/listSpecies?limit=" + limit
         client(url)
+
+    elif options == 2:
+        specie = input("Choose any specie: ")
+        url = "/karyotype?specie=" + specie
+        client(url)
