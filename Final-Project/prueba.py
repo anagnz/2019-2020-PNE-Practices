@@ -167,11 +167,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     input1, input2, json = values
                     specie = input1.split("=")[1]
                     chromo = input2.split("=")[1]
-                    number = json.split("=")[1]
                     info = get_info(f"info/assembly/" + specie + "?")["top_level_region"]
 
-                    if number == "1":
-                        contents = json.dumps(info)
+                    if json == "json=1":
+                        for element in info:
+                            if element["name"] == chromo:
+                                client_dict = {
+                                    "The lenght of the chromosome is": element["length"]
+                                }
+                            contents = json.dumps(client_dict)
                         self.send_response(200)
                         type = 'application/json'
                     else:
@@ -321,10 +325,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = Path('error.html').read_text()
             self.send_response(200)
 
-        list_resources = ["/", "/listSpecies", "/karyotype", "/chromosomeLength",
+        endpoints = ["/", "/listSpecies", "/karyotype", "/chromosomeLength",
                           "/geneSeq", "/geneInfo", "/geneCalc", "/geneList"]
 
-        if init in list_resources:
+        if init in endpoints: #esto hay que cambiarlo pero no se como llegar al siguiente if sino :))
             if len(values) == 2:
                 type = "application/json"
             else:

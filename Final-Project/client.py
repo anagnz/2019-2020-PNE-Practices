@@ -48,3 +48,9 @@ while valid:
         specie = input("Choose any specie: ")
         url = "/karyotype?specie=" + specie
         client(url)
+
+    elif options == 3:
+            specie = input("Choose specie: ")
+            chromosome = input("Choose chromosome: ")
+            url = f"/chromosomeLength?specie={specie}&chromo={chromosome}"
+            client(url)
