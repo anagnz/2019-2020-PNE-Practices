@@ -54,3 +54,25 @@ while valid:
             chromosome = input("Choose chromosome: ")
             url = f"/chromosomeLength?specie={specie}&chromo={chromosome}"
             client(url)
+
+    elif options == 4:
+        gene = input("Choose a human gene: ")
+        url = "/geneSeq?gene=" + gene
+        client(url)
+
+    elif options == 5:
+        gene = input("Choose a human gene: ")
+        url = "/geneInfo?gene=" + gene
+        client(url)
+
+    elif options == 6:
+        gene = input("Choose a human gene: ")
+        url = "/geneCalc?gene=" + gene
+        client(url)
+
+    elif options == 7:
+        chromo = input("Choose a human chromosome: ")
+        start = input("Choose the start point: ")
+        end = input("Choose the end point: ")
+        url = f"/geneList?chromo={chromo}&start={start}&end={end}"
+        client(url)
