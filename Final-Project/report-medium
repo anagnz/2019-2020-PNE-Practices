@@ -1,9 +1,9 @@
-Test report
+MEDIUM LEVEL Test report
 ========================================================================================================================
 
----> Main page endpoint
+---> Main page endpoint ------------------------------------------------------------------------------------------------
 
-* TEST 1:
+***** TEST 1: *****
 
 Index of options to choose what information the user wants to be shown.
 
@@ -143,9 +143,9 @@ http://127.0.0.1:8080/
 </html>
 
 
----> geneSeq endpoint
+---> geneSeq endpoint --------------------------------------------------------------------------------------------------
 
-* TEST 2:
+***** TEST 2: *****
 
 The sequence of the introduced human gene must appear.
 
@@ -176,9 +176,9 @@ http://127.0.0.1:8080/geneSeq?gene=FRAT1
 </html>
 
 
----> geneInfo endpoint
+---> geneInfo endpoint -------------------------------------------------------------------------------------------------
 
-* TEST 3:
+***** TEST 3: *****
 
 Info about the introduced gene such as its start and end points, length, id and chromosome to which it belongs must appear.
 
@@ -210,9 +210,9 @@ http://127.0.0.1:8080/geneInfo?gene=ADA
 </html>
 
 
----> geneCalc endpoint
+---> geneCalc endpoint -------------------------------------------------------------------------------------------------
 
-* TEST 4:
+***** TEST 4: *****
 
 The lenght and the percentage of each base of the sequence of the introduced gene must appear.
 
@@ -244,10 +244,39 @@ http://127.0.0.1:8080/geneCalc?gene=FXN
     </body>
 </html>
 
+***** TEST 5: *****
 
----> geneList endpoint
+* Input:
 
-* TEST 5:
+http://127.0.0.1:8080/geneCalc?gene=FRAT2
+
+* Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BASES CALCULATION</title>
+  </head>
+  <body style="background-color: lightyellow">
+    <p></p><p>
+
+
+                     </p>
+    <h1> Calculations over the introduced gene: FRAT2</h1>
+    <p> Total length of this gene is: 2233</p>
+    <p> The percentage of each base in the sequence of this gene is:</p>
+    <p>A: (18.4%)</p>
+    <p>C: (28.5%)</p>
+    <p>G: (31.8%)</p>
+    <p>T: (21.3%)</p>
+  </body>
+</html>
+
+
+---> geneList endpoint -------------------------------------------------------------------------------------------------
+
+***** TEST 6: *****
 
 A list of the genes that are located in the introduced human chromosome (between the start and the end that has also been introduced) must appear
 
@@ -275,7 +304,7 @@ http://127.0.0.1:8080/geneList?chromo=3&start=0&end=30000
 </html>
 
 
-* TEST 6: Another try with the same endpoint to check that it works with more human chromosomes.
+***** TEST 7: Another try with the same endpoint to check that it works with more human chromosomes.
 
 * Input:
 
@@ -305,4 +334,58 @@ http://127.0.0.1:8080/geneList?chromo=Y&start=0&end=450000
         <p> - AL732314.1</p>
         <p> - AL732314.6</p>
     </body>
+</html>
+
+
+---> Error --------------------------------------------------------------------------------------------------------------
+
+***** TEST 8: *****
+
+It appears when you submit an empty request
+
+* Input:
+
+http://127.0.0.1:8080/geneCalc?gene=
+
+* Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+  <body style="background-color: red">
+  <h1>ERROR</h1>
+
+    <h>If you're here is because the data you have entered is not available in ensembl </h><br><br>
+    Sorry!!!
+
+  </body>
+</html>
+
+
+***** TEST 9: *****
+
+It appears when you submit a request with a gene/specie that doesn't exist
+
+* Input:
+
+http://127.0.0.1:8080/geneInfo?gene=YYNYUNY
+
+* Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+  <body style="background-color: red">
+  <h1>ERROR</h1>
+
+    <h>If you're here is because the data you have entered is not available in ensembl </h><br><br>
+    Sorry!!!
+
+  </body>
 </html>

@@ -1,7 +1,6 @@
-Test report
-========================================================================================================================
+BASIC LEVEL Test report ==============================================================================================
 
----> Main page endpoint
+---> Main page endpoint ------------------------------------------------------------------------------------------------
 
 * TEST 1:
 
@@ -73,7 +72,7 @@ http://127.0.0.1:8080/
 </html>
 
 
----> listSpecies endpoint
+---> listSpecies endpoint ----------------------------------------------------------------------------------------------
 
 * TEST 2:
 
@@ -148,30 +147,30 @@ http://127.0.0.1:8080/listSpecies?limit=
         <p>• Upper Galilee mountains blind mole rat
         <p>• Asian bonytongue
         <p>• Siamese fighting fish
-        <p> • Siamese fighting fish</p>
-        <p> • Red fox</p>
-        <p> • Mallard</p>
-        <p> • Gilthead seabream</p>
-        <p> • Chicken</p>
-        <p> • Olive baboon</p>
-        <p> • Common carp german mirror</p>
-        <p> • Sperm whale</p>
-        <p> • Megabat</p>
-        <p> • Chinese hamster CriGri</p>
-        <p> • Reedfish</p>
-        <p> • Stickleback</p>
-        <p> • C.savignyi</p>
-        <p> • Dog - Basenji</p>
-        <p> • Platyfish</p>
-        <p> • Blue tilapia</p>
-        <p> • Donkey</p>
-        <p> • Turkey</p>
-        <p> • Mouse 129S1/SvImJ</p>
-        <p> • Mouse FVB/NJ</p>
-        <p> • Small tree finch</p>
-        <p> • Zebra finch</p>
-        <p> • Ryukyu mouse</p>
-        <p> • Wallaby</p>
+        <p>• Siamese fighting fish</p>
+        <p>• Red fox</p>
+        <p>• Mallard</p>
+        <p>• Gilthead seabream</p>
+        <p>• Chicken</p>
+        <p>• Olive baboon</p>
+        <p>• Common carp german mirror</p>
+        <p>• Sperm whale</p>
+        <p>• Megabat</p>
+        <p>• Chinese hamster CriGri</p>
+        <p>• Reedfish</p>
+        <p>• Stickleback</p>
+        <p>• C.savignyi</p>
+        <p>• Dog - Basenji</p>
+        <p>• Platyfish</p>
+        <p>• Blue tilapia</p>
+        <p>• Donkey</p>
+        <p>• Turkey</p>
+        <p>• Mouse 129S1/SvImJ</p>
+        <p>• Mouse FVB/NJ</p>
+        <p>• Small tree finch</p>
+        <p>• Zebra finch</p>
+        <p>• Ryukyu mouse</p>
+        <p>• Wallaby</p>
         <p>• Budgerigar</p>
         <p>• Pig - Hampshire</p>
         <p>• Tasmanian devil</p>
@@ -423,7 +422,7 @@ http://127.0.0.1:8080/listSpecies?limit=
 </html>
 
 
----> karyotype endpoint
+---> karyotype endpoint ------------------------------------------------------------------------------------------------
 
 * TEST 4:
 
@@ -470,9 +469,9 @@ http://127.0.0.1:8080/karyotype?specie=cat
 </html>
 
 
----> chromosomeLength endpoint
+---> chromosomeLength endpoint -----------------------------------------------------------------------------------------
 
-* TEST 5:
+***** TEST 5: *****
 
 In this case, only the length of the chromosome and species the user has introduced must be shown.
 
@@ -496,3 +495,76 @@ http://127.0.0.1:8080/chromosomeLength?specie=dog&chromo=3
     </body>
 </html>
 
+***** TEST 6 *****
+
+- Input:
+
+http://127.0.0.1:8080/chromosomeLength?specie=human&chromo=X
+
+- Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LENGTH OF THE CHROMOSOME SELECTED</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p></p>
+    <p>
+    <h> The length of the chromosome is: 156040895</h>
+    </p>
+  </body>
+</html>
+
+---> Error -----------------------------------------------------------------------------------------
+
+***** TEST 7 *****
+
+It appears when an empty request is submitted
+
+- Input:
+
+http://127.0.0.1:8080/karyotype?specie=
+
+- Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+  <body style="background-color: red">
+  <h1>ERROR</h1>
+
+    <h>If you're here is because the data you have entered is not available in ensembl </h><br><br>
+    Sorry!!!
+
+  </body>
+</html>
+
+***** TEST 8 *****
+
+This error appears when a gene or specie that doesn't exist is requested
+
+- Input:
+
+http://127.0.0.1:8080/chromosomeLength?specie=perro&chromo=1
+
+- Output:
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+  <body style="background-color: red">
+  <h1>ERROR</h1>
+
+    <h>If you're here is because the data you have entered is not available in ensembl </h><br><br>
+    Sorry!!!
+
+  </body>
+</html>
