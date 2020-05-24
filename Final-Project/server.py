@@ -144,7 +144,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     list.append(element["display_name"])
                                     counter += 1
                             contents = dict_listSpecies(limit, list)
-                        elif limit == " " :
+                        elif limit == " ":
                             for element in info:
                                 list.append(element["display_name"])
                                 counter += 1

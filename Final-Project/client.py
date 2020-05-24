@@ -31,7 +31,7 @@ def client(client_request, json_param):
     print(f"Response received!: {r1.status} {r1.reason}\n")
     data1 = r1.read().decode("utf-8")
     data = json.loads(data1)
-    print(f"CONTENT: {data}")
+    print(data)
 
 
 valid = True
