@@ -80,4 +80,4 @@ while valid:
     elif options == 8:
         valid = False
     else:
-        print("Choose a valid option between 1-7 or exit the client (8)")
+        print("Choose a valid option between 1-8")

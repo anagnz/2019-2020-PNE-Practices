@@ -54,7 +54,7 @@ def dict_geneInfo(start, end, length, id, chromo):
 def dict_geneCalc(length, list):
     contents = {
         "Total length of the gene is": length,
-        "The percentage of each base in the sequence of this gene is"
+        "The percentage of each base in the sequence of this gene is: "
         "A": list[0],
         "C": list[1],
         "G": list[2],
@@ -272,8 +272,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         end = info["end"]
                         length = info["end"]-info["start"]
                         id = info["id"]
-
-                        contents = dict_geneInfo(start, end, length, id, info["seq_region_name"])
+                        chromo = info["seq_region_name"]
+                        contents = dict_geneInfo(start, end, length, id, chromo)
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
