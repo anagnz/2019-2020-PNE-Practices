@@ -334,7 +334,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if json == "json=1":
                         list = []
-                        contents = json.dumps(info)
+                        for element in info:
+                            list.append(element["external_name"])
+                        contents = dict_geneList(list)
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
