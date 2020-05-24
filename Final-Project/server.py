@@ -19,12 +19,14 @@ def dict_listSpecies(limit, list):
     client_dict = json.dumps(contents)
     return client_dict
 
+
 def dict_karyotype(list):
     contents = {
         "The names of the chromosomes are": list
     }
     client_dict = json.dumps(contents)
     return client_dict
+
 
 def dict_chromosomeLength(length):
     contents = {
@@ -33,12 +35,14 @@ def dict_chromosomeLength(length):
     client_dict = json.dumps(contents)
     return client_dict
 
+
 def dict_geneSeq(seq):
     contents = {
         "The sequence of the selected gen is": seq
     }
     client_dict = json.dumps(contents)
     return client_dict
+
 
 def dict_geneInfo(start, end, length, id, chromo):
     contents = {
@@ -50,6 +54,7 @@ def dict_geneInfo(start, end, length, id, chromo):
     }
     client_dict = json.dumps(contents)
     return client_dict
+
 
 def dict_geneCalc(length, list):
     contents = {
@@ -63,12 +68,14 @@ def dict_geneCalc(length, list):
     client_dict = json.dumps(contents)
     return client_dict
 
+
 def dict_geneList(list):
     contents = {
         "List of genes located in the introduced chromosome": list
     }
     client_dict = json.dumps(contents)
     return client_dict
+
 
 def html(title, color):
     return f"""
@@ -112,9 +119,7 @@ port = 8080
 
 socketserver.TCPServer.allow_reuse_address = True
 
-
 class TestHandler(http.server.BaseHTTPRequestHandler):
-
 
     def do_GET(self):
 
