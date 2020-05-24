@@ -265,15 +265,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     input, json = values
                     gene = input.split("=")[1]
                     gene_id = get_info(f"/xrefs/symbol/homo_sapiens/{gene}?")[0]["id"]
-                    info = get_info(f"/sequence/id/{gene_id}?")
+                    info = get_info(f"/lookup/id/{gene_id}?")
 
                     if json == "json=1":
-                        start = info["start"]
-                        end = info["end"]
                         length = info["end"]-info["start"]
-                        id = info["id"]
-                        chromo = info["seq_region_name"]
-                        contents = dict_geneInfo(start, end, length, id, chromo)
+                        contents = dict_geneInfo(info["start"], info["end"], length, info["id"], info["seq_region_name"])
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
