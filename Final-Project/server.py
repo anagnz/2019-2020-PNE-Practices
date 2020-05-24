@@ -138,16 +138,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if json == "json=1":
                         list = []
                         counter = 0
-                        if 267 > int(limit):
+                        if limit == "":
+                            for element in info:
+                                list.append(element["display_name"])
+                                counter += 1
+                            contents = dict_listSpecies(limit, list)
+                        elif 267 > int(limit):
                             for element in info:
                                 if counter < int(limit):
                                     list.append(element["display_name"])
                                     counter += 1
-                            contents = dict_listSpecies(limit, list)
-                        elif limit == " ":
-                            for element in info:
-                                list.append(element["display_name"])
-                                counter += 1
                             contents = dict_listSpecies(limit, list)
                         else:
                             for element in info:
