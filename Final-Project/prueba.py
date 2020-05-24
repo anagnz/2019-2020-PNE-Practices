@@ -89,14 +89,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     counter = 0
                     if json == "json=1":
                         if 267 > int(limit):
-                            species_dict = {}
+                            contents = dict_listSpecies("buenas tardes", 267, limit)
+                            """species_dict = {}
                             for element in info:
                                 species_dict.update({counter: element["display_name"]})
                                 counter += 1
                         data = {'ListSpecies': species_dict}
-                        contents = json.dumps(data)
-                        self.response(200)
+                        contents = json.dumps(data)"""
                         type = 'application/json'
+                        self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
                         self.send_response(404)
@@ -132,7 +133,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     info = get_info("info/assembly/" + specie + "?")["karyotype"]
                     if json == "json=1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -160,7 +161,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if number == "1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -190,7 +191,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if json == "json=1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -218,7 +219,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if json == "json=1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -249,7 +250,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if json == "json=1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -282,7 +283,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     if json == "json=1":
                         contents = json.dumps(info)
-                        self.response(200)
+                        self.send_response(200)
                         type = 'application/json'
                     else:
                         contents = Path('error.html').read_text()
@@ -301,10 +302,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for element in info:
                         contents += f'<p>- {element["external_name"]}</p>'
                 self.send_response(200)
+            else:
+                contents = Path('error.html').read_text()
+                self.send_response(404)
 
         except (KeyError, TypeError, ValueError, IndexError):
             contents = Path('error.html').read_text()
-            self.send_response(404)
+            self.send_response(200)
 
 
         self.send_header('Content-Type', type)

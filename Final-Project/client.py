@@ -2,6 +2,7 @@ import http.client
 import termcolor
 import json
 
+
 def menu():
     print("""
     1.- /listSpecies
