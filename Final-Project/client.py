@@ -50,10 +50,10 @@ while valid:
         client(url)
 
     elif options == 3:
-            specie = input("Choose specie: ")
-            chromosome = input("Choose chromosome: ")
-            url = f"/chromosomeLength?specie={specie}&chromo={chromosome}"
-            client(url)
+        specie = input("Choose specie: ")
+        chromosome = input("Choose chromosome: ")
+        url = f"/chromosomeLength?specie={specie}&chromo={chromosome}"
+        client(url)
 
     elif options == 4:
         gene = input("Choose a human gene: ")
@@ -76,3 +76,8 @@ while valid:
         end = input("Choose the end point: ")
         url = f"/geneList?chromo={chromo}&start={start}&end={end}"
         client(url)
+
+    elif options == 8:
+        valid = False
+    else:
+        print("Choose a valid option between 1-7 or exit the client (8)")

@@ -40,7 +40,7 @@ def dict_geneSeq(seq):
     client_dict = json.dumps(contents)
     return client_dict
 
-def dict_geneInfo(start, end, length, id, chromo): #no me sale :(
+def dict_geneInfo(start, end, length, id, chromo):
     contents = {
         "The start point is": start,
         "The end point is": end,
@@ -51,14 +51,14 @@ def dict_geneInfo(start, end, length, id, chromo): #no me sale :(
     client_dict = json.dumps(contents)
     return client_dict
 
-def dict_geneCalc(length, calc_A, calc_C, calc_G, calc_T):
+def dict_geneCalc(length, list):
     contents = {
         "Total length of the gene is": length,
         "The percentage of each base in the sequence of this gene is"
-        "A": calc_A,
-        "C": calc_C,
-        "G": calc_G,
-        "T": calc_T
+        "A": list[0],
+        "C": list[1],
+        "G": list[2],
+        "T": list[3]
     }
     client_dict = json.dumps(contents)
     return client_dict
@@ -268,8 +268,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     info = get_info(f"/sequence/id/{gene_id}?")
 
                     if json == "json=1":
-                        length = info["end"] - info["start"]
-                        contents = dict_geneInfo(info["start"], info["end"], length, info["id"], info["seq_region_name"])
+                        start = info["start"]
+                        end = info["end"]
+                        length = info["end"]-info["start"]
+                        id = info["id"]
+
+                        contents = dict_geneInfo(start, end, length, id, info["seq_region_name"])
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
@@ -299,10 +303,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     info = get_info(f"/sequence/id/{gene_id}?")["seq"]
                     sequence = Seq(info)
                     if json == "json=1":
-                        dict = {}
+                        bases = []
                         for base in list_bases:
-                            dict.update(f"{base}: ({sequence.count_base(base)[1]}%)")
-                        contents = dict_geneCalc(sequence.len(), dict)
+                            bases.append(sequence.count_base(base)[1])
+                        contents = dict_geneCalc(sequence.len(), bases)
                         self.send_response(200)
                     else:
                         contents = Path('error.html').read_text()
